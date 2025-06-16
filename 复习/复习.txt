@@ -1,0 +1,126 @@
+this指针
+
+A(){cout<<this<<endl;}
+
+A(const A& a){cout<<this<<endl;}
+
+~A(){cout<<this<<endl;}
+
+
+A* getthis(){return this;}
+
+
+A getthis1(){return *this;}
+return 会产生临时对象
+但是用A b=a.getthis1();
+将临时对象直接 给b对象
+不会销毁
+
+
+A& getthis2(){return *this;}
+不产生临时对象
+A b=a.getthis2();
+会调用拷贝构造函数产生新对象
+
+
+Cylinder(double radius){
+this->radius=radius;
+}
+
+可以使用这个来赋值因为
+编译器回先寻找参数表
+再查找私有成员
+
+
+静态成员函数不属于对象
+不能使用this指针访问
+
+静态函数也不能访问类中的非静态成员
+因为可能在未产生对象时使用
+
+
+如果函数防返回是对象的引用
+参数表需要引用会指针
+因为普通参数对象出了函数会被析构
+
+
+
+
+
+常对象
+
+const 类名 对象名
+或 类名 const 对象名
+
+声明常对象时需要初始化
+并且不能修改值
+
+常对象只能调用常函数
+
+int geta()const{return a;}
+
+bool cmp(const A & a1,const A &a2){
+return a1.geta()<a2.geta();}
+
+sort(a,a+t,cmp);
+\
+
+常成员函数
+
+类型 函数名（参数表）const{}
+
+常成员函数也不能调用非  常成员函数
+
+静态成员函数不能声明为常成员函数
+
+const 参与重载函数的区分
+
+void getAB();
+void getAB()const;
+
+
+常数据成员
+
+常数据成员的值不能改变
+
+定义时直接初始化
+const int hour =10;
+或者
+
+const int hour;
+Time(int h):hour(h){}
+
+可以出现在参数初始化列表中
+因为可以在分配空间时将值初始化
+
+
+为什么要用const 成员
+
+值不允许改变
+
+任何不会修改数据成员的函数
+都应该声明为const
+
+提高程序的健壮性
+
+
+注意事项
+
+可以使用const 重载
+
+构造函数和析构函数不能定义为const
+
+常成员只能调用常成员，不能改变数据
+
+
+
+
+char转int
+atoi();
+atof();转float
+atod();转double;
+
+string转int
+stoi();
+stof();
+stod();
